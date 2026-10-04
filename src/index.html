@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>So it begins..</title>
+<style>
+  html, body {
+    margin: 0; width: 100%; height: 100%; background: #000; overflow: hidden;
+    overscroll-behavior: none; touch-action: manipulation;
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent; cursor: default;
+  }
+  canvas#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #000; }
+  #intro {
+    position: fixed; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: opacity 1.6s ease;
+  }
+  #intro span {
+    padding: 2em 2.5em 2em calc(2.5em + 0.32em);
+    font-family: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-weight: 300; font-size: clamp(18px, 3vw, 34px); letter-spacing: 0.32em; white-space: nowrap;
+    color: #ece6da; opacity: 0; text-shadow: 0 0 22px rgba(255, 236, 205, 0.22);
+    animation: intro-in 3.2s ease 0.5s forwards, intro-breathe 6s ease-in-out 3.7s infinite;
+  }
+  #intro.waiting { opacity: 0.55; }
+  #intro.gone { opacity: 0; pointer-events: none; }
+  #intro.gone span { animation-play-state: paused; }
+  #intro.again span { animation: intro-in 3.2s ease 0.2s forwards, intro-breathe 6s ease-in-out 3.4s infinite; opacity: 0; }
+  @keyframes intro-in { from { opacity: 0; filter: blur(6px); } to { opacity: 0.92; filter: blur(0); } }
+  @keyframes intro-breathe { 0%, 100% { opacity: 0.92; } 50% { opacity: 0.66; } }
+  #counter {
+    position: fixed; z-index: 1; pointer-events: none;
+    right: calc(14px + env(safe-area-inset-right)); bottom: calc(12px + env(safe-area-inset-bottom));
+    font: 300 clamp(10px, 1.05vw, 14px)/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.7), 0 0 18px rgba(0, 0, 0, 0.45);
+    opacity: 0; transition: opacity 2.2s ease;
+  }
+  #counter.on { opacity: 1; }
+  body.still #counter, body.still #intro { transition: none; }
+  body.playing { cursor: none; }
+  body.playing.cursor, body.paused { cursor: default; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="intro"><span>So it begins..</span></div>
+<div id="counter">13,800,000,000</div>
+<!-- SCRIPTS -->
+</body>
+</html>
